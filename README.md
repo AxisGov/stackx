@@ -1,12 +1,26 @@
-# stackx
-
-Descobre como o seu projeto realmente faz as coisas e escreve isso num arquivo
-que a IA obedece.
+<div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/stackx-fluxo-dark.svg">
-  <img alt="O stackx lê manifestos, testes, migrações e código do repositório e gera o CONVENCOES.md, que sprintx, runx e legadox consultam antes de escrever código; quando encontra dois dialetos em conflito, pergunta ao humano em vez de escolher sozinho." src="assets/stackx-fluxo.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/banner-light.svg">
+  <img alt="stackx — o dialeto tecnico do seu projeto" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/banner-light.svg" width="100%">
 </picture>
+
+<p>
+  <img alt="harness: Claude Code" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-claude.svg">
+  <img alt="harness: OpenCode" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-opencode.svg">
+  <img alt="regra: evidencia obrigatoria" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-evidencia.svg">
+  <img alt="schema expx v1" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-schema.svg">
+  <img alt="docs pt-BR" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-lang.svg">
+  <img alt="licenca MIT" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-license.svg">
+</p>
+
+<strong>A camada de convenções do método Expx</strong> — descobre e formaliza o dialeto<br>
+técnico do seu repositório para <a href="https://claude.com/claude-code">Claude Code</a> e <a href="https://opencode.ai">OpenCode</a>.
+
+</div>
+
+---
 
 Todo repositório tem um dialeto: onde o teste mora, como o banco é isolado entre
 testes, qual comando roda a suíte de verdade, quais camadas podem chamar quais.
@@ -57,9 +71,26 @@ usa factory ou fixture, se o banco reseta por transação ou por truncate, se a
 camada HTTP é mockada ou sobe container. Nada disso cabe num pacote genérico:
 está no repositório do cliente.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/fluxo-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/fluxo-light.svg">
+  <img alt="O stackx le manifestos, testes, migracoes e codigo do repositorio e gera o CONVENCOES.md, que sprintx, runx e legadox consultam antes de escrever codigo; diante de dois dialetos em conflito, pergunta ao humano em vez de escolher sozinho" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/fluxo-light.svg" width="100%">
+</picture>
+
 Por isso o stackx é um **detector e gerador**, não um catálogo. Uma skill só,
 qualquer stack, e o resultado é o dialeto verdadeiro do projeto — não um ideal de
 artigo de blog.
+
+## As cinco etapas
+
+Estritamente sequenciais, e só a terceira fala com você — porque é a única em
+que o repositório não tem a resposta.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/pipeline-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/pipeline-light.svg">
+  <img alt="As cinco etapas do stackx: deteccao, convencoes, conflito e lacuna, aderencia e atualizacao, com o artefato de cada uma e os caminhos de retorno" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/pipeline-light.svg" width="100%">
+</picture>
 
 ## O que o CONVENCOES.md responde
 
@@ -179,6 +210,12 @@ são idênticos entre `.claude/commands/` e `.opencode/commands/`.
 | `/stackx-migracao` | Consulta o risco de uma alteração de esquema |
 
 ## Integração com sprintx, runx e legadox
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/ecossistema-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/ecossistema-light.svg">
+  <img alt="O stackx e a camada de convencoes sob sprintx, runx e legadox: as tres consultam o CONVENCOES.md antes de escrever codigo" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/ecossistema-light.svg" width="100%">
+</picture>
 
 Sem `docs/stack/CONVENCOES.md`, nada muda: as três skills se comportam como hoje.
 

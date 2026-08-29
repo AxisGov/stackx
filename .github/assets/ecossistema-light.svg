@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300" role="img" aria-label="O stackx e a camada de convencoes sob sprintx, runx e legadox: as tres consultam o CONVENCOES.md antes de escrever codigo">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#8250df"/></marker>
+  </defs>
+  <rect width="1000" height="300" rx="12" fill="#ffffff"/>
+  <text x="36" y="40" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="17" font-weight="700" fill="#1f2328">Onde o stackx entra no metodo Expx</text>
+  <text x="36" y="62" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12.5" fill="#59636e">Sem CONVENCOES.md, as tres skills se comportam exatamente como hoje.</text>
+
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+    <rect x="36" y="92" width="290" height="76" rx="10" fill="#f6f8fa" stroke="#d1d9e0"/>
+    <rect x="36" y="92" width="290" height="4" rx="2" fill="#0969da"/>
+    <text x="52" y="122" font-size="14" font-weight="700" fill="#1f2328">sprintx  <tspan fill="#59636e" font-size="11">(Build)</tspan></text>
+    <text x="52" y="146" font-size="10.5" fill="#59636e">feature nova · F1 a F6</text>
+    <text x="52" y="161" font-size="9.5" fill="#0969da">F3 usa as convencoes nas tasks · F5 audita</text>
+
+    <rect x="350" y="92" width="290" height="76" rx="10" fill="#f6f8fa" stroke="#d1d9e0"/>
+    <rect x="350" y="92" width="290" height="4" rx="2" fill="#bc4c00"/>
+    <text x="366" y="122" font-size="14" font-weight="700" fill="#1f2328">runx  <tspan fill="#59636e" font-size="11">(Run)</tspan></text>
+    <text x="366" y="146" font-size="10.5" fill="#59636e">ocorrencia em producao · E1 a E5</text>
+    <text x="366" y="161" font-size="9.5" fill="#bc4c00">E1 le e consulta cartucho · E4 audita</text>
+
+    <rect x="664" y="92" width="300" height="76" rx="10" fill="#f6f8fa" stroke="#d1d9e0"/>
+    <rect x="664" y="92" width="300" height="4" rx="2" fill="#9a6700"/>
+    <text x="680" y="122" font-size="14" font-weight="700" fill="#1f2328">legadox  <tspan fill="#59636e" font-size="11">(modificador)</tspan></text>
+    <text x="680" y="146" font-size="10.5" fill="#59636e">projeto legado · raio e orcamento</text>
+    <text x="680" y="161" font-size="9.5" fill="#9a6700">na area tocada, o PERFIL.md vence</text>
+  </g>
+
+  <g stroke="#8250df" stroke-width="2" fill="none">
+    <path d="M181 232v-56" marker-end="url(#a)"/>
+    <path d="M495 232v-56" marker-end="url(#a)"/>
+    <path d="M814 232v-56" marker-end="url(#a)"/>
+  </g>
+
+  <rect x="36" y="234" width="928" height="52" rx="10" fill="#f6f8fa" stroke="#8250df" stroke-width="2"/>
+  <text x="56" y="258" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="14" font-weight="700" fill="#1f2328">stackx</text>
+  <text x="130" y="258" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11.5" fill="#8250df">docs/stack/CONVENCOES.md</text>
+  <text x="56" y="276" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#59636e">a camada de convencoes: o dialeto tecnico do projeto, descoberto no codigo e com evidencia em cada regra</text>
+</svg>
