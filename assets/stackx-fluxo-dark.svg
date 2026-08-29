@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 460" role="img" aria-label="Fluxo do stackx: o repositorio alimenta a deteccao, que gera o CONVENCOES.md, consumido por sprintx, runx e legadox; dialetos conflitantes geram uma pergunta ao humano.">
+  <rect x="0" y="0" width="980" height="460" fill="#0d1117"/>
+
+  <!-- ============ COLUNA 1 — REPOSITORIO ============ -->
+  <rect x="24" y="60" width="196" height="256" rx="10" fill="#161b22" stroke="#a6adbb" stroke-width="2"/>
+  <text x="122" y="88" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="bold" fill="#f0f3f6">Repositório</text>
+
+  <rect x="44" y="104" width="156" height="34" rx="6" fill="#0d1117" stroke="#8b949e" stroke-width="1.5"/>
+  <text x="122" y="126" text-anchor="middle" font-family="monospace" font-size="13" fill="#e6edf3">manifestos</text>
+
+  <rect x="44" y="148" width="156" height="34" rx="6" fill="#0d1117" stroke="#8b949e" stroke-width="1.5"/>
+  <text x="122" y="170" text-anchor="middle" font-family="monospace" font-size="13" fill="#e6edf3">testes</text>
+
+  <rect x="44" y="192" width="156" height="34" rx="6" fill="#0d1117" stroke="#8b949e" stroke-width="1.5"/>
+  <text x="122" y="214" text-anchor="middle" font-family="monospace" font-size="13" fill="#e6edf3">migrações</text>
+
+  <rect x="44" y="236" width="156" height="34" rx="6" fill="#0d1117" stroke="#8b949e" stroke-width="1.5"/>
+  <text x="122" y="258" text-anchor="middle" font-family="monospace" font-size="13" fill="#e6edf3">código, CI</text>
+
+  <text x="122" y="296" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#b9c1cc">evidência real</text>
+
+  <!-- seta repositorio -> stackx -->
+  <line x1="220" y1="188" x2="292" y2="188" stroke="#e6edf3" stroke-width="2.5"/>
+  <polygon points="304,188 288,181 288,195" fill="#e6edf3"/>
+  <text x="258" y="178" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b9c1cc">lê</text>
+
+  <!-- ============ COLUNA 2 — STACKX ============ -->
+  <rect x="306" y="92" width="188" height="192" rx="10" fill="#16293f" stroke="#79b8ff" stroke-width="2.5"/>
+  <text x="400" y="122" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#dbeaff">stackx</text>
+  <text x="400" y="146" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#a8cbf5">detector e gerador</text>
+
+  <line x1="326" y1="160" x2="474" y2="160" stroke="#79b8ff" stroke-width="1.2"/>
+
+  <text x="400" y="182" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#dbeaff">1 detecção</text>
+  <text x="400" y="202" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#dbeaff">2 convenções</text>
+  <text x="400" y="222" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#dbeaff">3 conflito e lacuna</text>
+  <text x="400" y="242" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#dbeaff">4 aderência</text>
+  <text x="400" y="262" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#dbeaff">5 atualização</text>
+
+  <!-- ramo lateral: conflito -> pergunta ao humano -->
+  <line x1="400" y1="284" x2="400" y2="340" stroke="#e0a458" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <polygon points="400,352 393,336 407,336" fill="#e0a458"/>
+  <rect x="272" y="354" width="256" height="66" rx="10" fill="#3a2a14" stroke="#e0a458" stroke-width="2.5"/>
+  <text x="400" y="380" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fbe2bd">dialetos conflitantes</text>
+  <text x="400" y="402" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#fbe2bd">pergunta ao humano</text>
+  <text x="414" y="322" text-anchor="start" font-family="sans-serif" font-size="11" fill="#e0a458">não escolhe sozinho</text>
+
+  <!-- seta stackx -> convencoes -->
+  <line x1="494" y1="188" x2="566" y2="188" stroke="#e6edf3" stroke-width="2.5"/>
+  <polygon points="578,188 562,181 562,195" fill="#e6edf3"/>
+  <text x="532" y="178" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b9c1cc">gera</text>
+
+  <!-- ============ COLUNA 3 — CONVENCOES.md ============ -->
+  <rect x="580" y="112" width="184" height="152" rx="10" fill="#12301e" stroke="#56d364" stroke-width="2.5"/>
+  <text x="672" y="142" text-anchor="middle" font-family="monospace" font-size="15" font-weight="bold" fill="#cdf5d3">CONVENCOES.md</text>
+  <line x1="600" y1="156" x2="744" y2="156" stroke="#56d364" stroke-width="1.2"/>
+  <text x="672" y="178" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cdf5d3">testes e banco</text>
+  <text x="672" y="198" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cdf5d3">comandos reais</text>
+  <text x="672" y="218" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cdf5d3">camadas e erros</text>
+  <text x="672" y="244" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8ee39a">toda regra com evidência</text>
+
+  <!-- seta convencoes -> skills -->
+  <line x1="764" y1="188" x2="828" y2="188" stroke="#e6edf3" stroke-width="2.5"/>
+  <polygon points="840,188 824,181 824,195" fill="#e6edf3"/>
+  <text x="798" y="178" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b9c1cc">obedecem</text>
+
+  <!-- ============ COLUNA 4 — SKILLS IRMAS ============ -->
+  <rect x="842" y="96" width="116" height="48" rx="8" fill="#161b22" stroke="#a6adbb" stroke-width="2"/>
+  <text x="900" y="126" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#f0f3f6">sprintx</text>
+
+  <rect x="842" y="164" width="116" height="48" rx="8" fill="#161b22" stroke="#a6adbb" stroke-width="2"/>
+  <text x="900" y="194" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#f0f3f6">runx</text>
+
+  <rect x="842" y="232" width="116" height="48" rx="8" fill="#161b22" stroke="#a6adbb" stroke-width="2"/>
+  <text x="900" y="262" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold" fill="#f0f3f6">legadox</text>
+
+  <text x="900" y="304" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b9c1cc">na área tocada,</text>
+  <text x="900" y="320" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b9c1cc">o PERFIL.md vence</text>
+
+  <!-- rodape -->
+  <text x="24" y="440" text-anchor="start" font-family="sans-serif" font-size="12" fill="#b9c1cc">Convenção não se propõe, se descobre. Sem evidência no código, é PROPOSTA — e PROPOSTA não governa.</text>
+</svg>
