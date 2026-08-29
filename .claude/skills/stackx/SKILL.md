@@ -66,7 +66,8 @@ convenção — exatamente o colateral que o legadox proíbe.
 ## As cinco etapas
 
 ### Etapa 1 — Detecção
-Varre o repositório e coleta evidência real, nesta ordem: manifestos e locks →
+Roda no agente `cartografo` (ver abaixo). Varre o repositório e coleta evidência
+real, nesta ordem: manifestos e locks →
 configuração de runner/lint/formatador/type checker/build → **os testes que já
 existem** (a fonte mais rica) → migrações e schema → scripts dos manifestos →
 integração contínua → arquivos de ambiente de exemplo → o próprio código
@@ -88,7 +89,9 @@ aquilo, e no máximo uma PROPOSTA marcada no CONVENCOES.md. Detalhe em
 ### Etapa 4 — Verificação de aderência
 Confere um diff ou pasta contra o CONVENCOES.md. Saída: tabela
 `severidade | arquivo | convenção violada | correção sugerida`. Aponta, não
-corrige. Detalhe em `references/04-aderencia.md`.
+corrige. Roda em duas formas: sob demanda (`/stackx-check`, completa) e contínua
+(hook `aderencia`, a cada escrita, deliberadamente mais estreita). Detalhe em
+`references/04-aderencia.md`.
 
 ### Etapa 5 — Atualização
 Redetecta e apresenta um DIFF entre o CONVENCOES.md atual e o que o repositório
@@ -108,6 +111,68 @@ Critério de existência de um cartucho — os três, juntos: **não óbvio**,
 
 Leia **apenas a seção da engine/ORM/runner em uso**, confirmada no
 CONVENCOES.md. Comportamento varia por versão.
+
+## Agentes e hooks
+
+Esta é a skill com **menos** hooks, e isso é intencional: ela produz o arquivo que
+as outras consultam. O papel dela na camada de hooks é ser a fonte de verdade.
+
+### O agente `cartografo`
+
+A Etapa 1 roda em agente próprio, compartilhado com o legadox (prompt diferente
+por skill: aqui o alvo é extrair convenção; lá, montar perfil e zonas de risco).
+
+| | |
+| --- | --- |
+| Ferramentas | leitura, busca e histórico do versionador; sem escrita fora de `docs/stack/` |
+| Por que agente | a detecção lê muito — manifestos, configuração, todos os testes, migrações, estrutura. Em contexto próprio, isso não consome o contexto de quem depois vai planejar |
+| Regra no prompt | toda convenção aponta arquivo e linha que a exemplifica. Sem exemplo, é `PROPOSTA`, e proposta não governa |
+
+O uso do histórico é o que faz o agente valer: é ele que diz qual dialeto é o
+mais **recente**, não só o mais numeroso. Sem isso o agente cristaliza o legado
+como convenção oficial — o erro que a skill inteira existe para evitar.
+
+Arquivos: `.claude/agents/cartografo.md`, `.opencode/agent/cartografo.md`.
+
+### Os dois hooks
+
+| Hook | Evento | Faz |
+| ---- | ------ | --- |
+| `aderencia` | `PostToolUse` em ferramentas de escrita | Etapa 4 contínua: nome do arquivo de teste contra o padrão declarado, e segredo literal |
+| `sem-convencoes` | `SessionStart` | Sem `CONVENCOES.md` e com código no projeto, injeta **uma** linha sugerindo a detecção. Não bloqueia nada |
+
+**A nota que não pode ser esquecida:** ponto marcado `PROPOSTA` no
+`CONVENCOES.md` **nunca gera violação**. No máximo um aviso, e o rastro registra
+separadamente. Convenção sem evidência no código não governa — se governasse, o
+stackx viraria uma máquina de impor padrão inventado. Vale igual para
+`CONFLITO EM ABERTO`.
+
+**Exclusão obrigatória:** o `aderencia` não roda em arquivo antigo, nem dentro de
+área tocada, quando `docs/legado/PERFIL.md` existir. Ali manda o padrão local.
+Sem essa exclusão, os hooks das duas skills brigam e a IA moderniza legado
+achando que obedece convenção.
+
+Ambos nascem em modo `aviso` (`.expx/hooks.json`) e o `aderencia` provavelmente
+fica nele por bastante tempo: a heurística de "local esperado do arquivo de
+teste" erra com facilidade em repositório real — por isso ela não está no hook.
+
+Arquivos: `.claude/hooks/stackx/`, registrados em `.claude/settings.json` e, no
+OpenCode, em `.opencode/plugin/stackx-hooks.js` — que invoca os mesmos scripts.
+
+### O papel do stackx nos hooks das outras skills
+
+O `CONVENCOES.md` é consultado por hooks que não são desta skill:
+
+| Hook | Skill | O que consulta |
+| ---- | ----- | -------------- |
+| `tdd-teste-antes` | sprintx | onde o teste correspondente deveria estar |
+| `escopo-da-task` | sprintx | camadas, para explicar melhor a violação |
+| convenção de commit e branch | mergex | formato de mensagem e nome de branch |
+| comando de teste | todas | o comando real, para o hook não chutar |
+
+Consequência de desenho: **esses hooks ficam inativos quando o `CONVENCOES.md`
+não existe**, em vez de adivinhar. Hook que chuta o local do teste gera falso
+positivo, e falso positivo mata a adoção de todos os hooks juntos.
 
 ## Regras invioláveis
 
@@ -131,6 +196,15 @@ CONVENCOES.md. Comportamento varia por versão.
 | 3 — Conflito e lacuna | `references/03-conflito-e-lacuna.md` | `assets/TEMPLATE-conflito.md`, `assets/TEMPLATE-LACUNAS.md` → `docs/stack/LACUNAS.md` |
 | 4 — Aderência | `references/04-aderencia.md` | `assets/TEMPLATE-aderencia.md` |
 | 5 — Atualização | `references/05-atualizacao.md` | diff sobre `docs/stack/CONVENCOES.md` |
+
+| Componente | Arquivo |
+| ---------- | ------- |
+| Agente `cartografo` | `.claude/agents/cartografo.md` · `.opencode/agent/cartografo.md` |
+| Hook `aderencia` | `.claude/hooks/stackx/aderencia.py` |
+| Hook `sem-convencoes` | `.claude/hooks/stackx/sem-convencoes.py` |
+| Rastro de eventos | `.claude/hooks/stackx/_rastro.py` → `docs/eventos/<trabalho_id>.jsonl` |
+| Registro dos hooks | `.claude/settings.json` · `.opencode/plugin/stackx-hooks.js` |
+| Modo de cada hook | `.expx/hooks.json` |
 
 | Skill irmã | Reference de integração |
 | ---------- | ----------------------- |

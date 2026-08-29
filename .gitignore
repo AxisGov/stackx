@@ -4,3 +4,11 @@ node_modules/
 # prompts de construção da skill — material interno, não faz parte da entrega
 prompt1.md
 prompt2.md
+
+# rastro de eventos — local da máquina de quem executou, cresce rápido, o painel
+# roda local. Quem quiser rastro compartilhado troca isto conscientemente.
+docs/eventos/
+
+# cache do Python dos hooks
+__pycache__/
+*.pyc

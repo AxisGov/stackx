@@ -56,6 +56,30 @@ registre a incerteza. Não invente convenção — e, se fizer sentido, sugira r
 - **Arquivo existente em projeto legado:** siga o padrão local. Não modernize,
   não renomeie, não realinhe — nem "para depois".
 
+## Hooks e agentes ativos neste repositório
+
+Dois hooks e um agente. Ambos os hooks nascem em modo `aviso` (`.expx/hooks.json`)
+e nenhum bloqueia ação.
+
+| Componente | Quando roda | O que faz |
+| ---------- | ----------- | --------- |
+| agente `cartografo` | Etapa 1 (`/stackx-detectar`, `/stackx-atualizar`) | varre o repositório em contexto próprio e devolve o inventário de evidência; não escreve arquivo |
+| hook `sem-convencoes` | início de sessão | sem `CONVENCOES.md` e com código no projeto, injeta uma linha sugerindo a detecção |
+| hook `aderencia` | depois de cada escrita de arquivo | confere nome de arquivo de teste contra o padrão declarado, e segredo literal |
+
+Duas coisas que o `aderencia` **não** faz, por desenho:
+
+- Não gera violação em ponto marcado `PROPOSTA` ou `CONFLITO EM ABERTO` no
+  `CONVENCOES.md`. Convenção sem evidência não governa (regra 3).
+- Não roda em arquivo já rastreado, nem em área tocada descrita no
+  `docs/legado/PERFIL.md`. Ali manda o padrão local (regra 6).
+
+Sem `docs/stack/CONVENCOES.md`, o `aderencia` fica inativo em vez de adivinhar.
+
+O registro fica em `.claude/settings.json` (Claude Code) e
+`.opencode/plugin/stackx-hooks.js` (OpenCode) — os dois invocam os mesmos
+scripts em `.claude/hooks/stackx/`, para a lógica não divergir.
+
 ## Comandos
 
 | Comando | Faz |

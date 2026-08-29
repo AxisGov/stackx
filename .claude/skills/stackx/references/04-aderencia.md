@@ -6,6 +6,65 @@ antes de fechar uma task (sprintx F5, runx E4).
 **A regra que governa esta etapa: aponta, não corrige.** Você não edita arquivo
 nenhum aqui. Nem para "só arrumar o nome". A correção é decisão de quem escreveu.
 
+## Duas formas de rodar
+
+| Forma | Quando | Cobertura |
+| ----- | ------ | --------- |
+| **Sob demanda** (`/stackx-check`) | portão antes de fechar a task | os 8 pontos abaixo, o alvo inteiro |
+| **Contínua** (hook `aderencia`) | a cada arquivo escrito | só o que é verificável por script |
+
+O resto deste arquivo descreve a forma sob demanda, que é a completa. A contínua
+está descrita logo abaixo, e é deliberadamente mais estreita.
+
+### O hook `aderencia` — a verificação contínua
+
+`PostToolUse` nas ferramentas de escrita, em `.claude/hooks/stackx/aderencia.py`.
+É esta etapa rodando a cada arquivo, em vez de só na auditoria.
+
+Ele verifica um subconjunto: nome do arquivo de teste contra o padrão declarado,
+e segredo literal no código. Os pontos que exigem julgamento — camada, padrão de
+erro, factory, isolamento de banco — ficam para a forma sob demanda.
+
+**Por que tão estreito.** Falso positivo mata a adoção de todos os hooks juntos.
+O hook só verifica o que consegue extrair do `CONVENCOES.md` de forma literal;
+ponto que ele não consegue ler com certeza é ponto sobre o qual ele cala. A
+heurística de "local esperado do arquivo de teste" erra com facilidade em
+repositório real — por isso ela **não** está no hook, só aqui.
+
+Três regras que o hook obedece, e que valem reler:
+
+1. **Ponto marcado `PROPOSTA` nunca gera violação.** No máximo um aviso, e o
+   rastro registra separadamente, como `resultado: proposta`. Convenção sem
+   evidência no código não governa — se governasse, o stackx viraria máquina de
+   impor padrão inventado. Vale igual para `CONFLITO EM ABERTO`.
+2. **Não roda em arquivo antigo, nem em área tocada do legado.** Se
+   `docs/legado/PERFIL.md` existe, o hook sai calado para todo arquivo já
+   rastreado e para todo arquivo dentro da área que o PERFIL.md descreve. Sem
+   essa exclusão, os hooks das duas skills brigam e a IA moderniza legado achando
+   que obedece convenção.
+3. **Sem `CONVENCOES.md`, o hook fica inativo.** Não chuta o local do teste, não
+   infere padrão. Hook que chuta gera falso positivo.
+
+**O que ele ignora, e por quê.** Duas exclusões saíram de medição, não de
+teoria. Rodado contra um repositório real de 920 arquivos de teste cuja convenção
+é de fato `*.test.ts`, a primeira versão emitiu **795 avisos** — 86% de falso
+positivo. A distribuição mostrou a causa:
+
+| Origem | Avisos | Correção |
+| ------ | ------ | -------- |
+| `.map`, `.d.ts`, `.js` compilado | 574 | artefato de build não é código-fonte: não se verifica |
+| `.tsx` sob convenção escrita `*.test.ts` | 21 | extensão final diferente é lacuna, não violação: o hook cala |
+
+Depois das duas exclusões: **0 falsos positivos** nos mesmos 920 arquivos, e a
+violação real (`.spec.ts` num projeto `*.test.ts`) continua sendo pega. Se você
+for ampliar o hook, repita essa medição antes — é barata e é o que separa um hook
+que sobrevive de um que é desinstalado.
+
+Ele nasce em modo `aviso` — registra no rastro, não bloqueia — e provavelmente
+fica nele por bastante tempo. O modo vive em `.expx/hooks.json`. Promoção a
+`bloqueio` só depois de semanas sem falso positivo, guiada pela lista de
+violações que o painel acumulou.
+
 ## Pré-requisitos verificáveis
 
 ```bash

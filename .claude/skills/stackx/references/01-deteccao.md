@@ -3,6 +3,30 @@
 Você vai varrer o repositório e sair com um inventário de evidência. Não escreva
 o CONVENCOES.md aqui: esta etapa só coleta. Escrever é a Etapa 2.
 
+## Delegue ao agente `cartografo`
+
+Esta etapa **roda no agente `cartografo`**, não no contexto principal.
+
+A detecção lê muito — manifestos, configuração, todos os testes existentes,
+migrações, estrutura, histórico. Em contexto próprio, isso não consome o contexto
+de quem depois vai planejar. O agente devolve o inventário; quem o chamou escreve
+o arquivo.
+
+```
+Agent(subagent_type="cartografo",
+      prompt="Rode a Etapa 1 do stackx neste repositório. Devolva o inventário
+              FATO / EVIDÊNCIA / FORÇA no formato de 01-deteccao.md.")
+```
+
+O agente tem leitura, busca e histórico do versionador, e **não escreve fora de
+`docs/stack/`** — na prática, não escreve arquivo nenhum nesta etapa.
+
+O resto deste arquivo é a especificação que o `cartografo` segue. Leia-o também
+quando for consumir o inventário: é ele que define o que cada campo significa.
+
+> Sem o agente disponível (harness que não os suporte), execute o roteiro abaixo
+> no contexto principal. O resultado é o mesmo; o custo de contexto, não.
+
 ## Pré-requisitos verificáveis
 
 Antes de começar, confirme e anote:
