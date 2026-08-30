@@ -32,6 +32,27 @@ daquele projeto**, não num dialeto genérico.
 
 ---
 
+## O ecossistema Expx
+
+O método Expx é um conjunto de skills que se compõem, instaladas e mantidas pelo CLI [`expxdev`](https://github.com/bittencourtthulio/expxdev).
+
+| Peça | Papel | Relação com a `stackx` |
+|---|---|---|
+| **[expxdev](https://github.com/bittencourtthulio/expxdev)** | o CLI: instala, atualiza e diagnostica o ecossistema, e sobe o painel de operação | é quem instala esta skill (`npx expxdev init`) |
+| **[sprintx](https://github.com/bittencourtthulio/sprintx)** | **Build** — feature nova, F1…F6 | lê o `CONVENCOES.md` na ingestão, no plano, na auditoria e na execução |
+| **[runx](https://github.com/bittencourtthulio/runx)** | **Run** — ocorrência em produção, E1…E5 | lê as convenções na investigação e no fix; consulta os cartuchos pelo sintoma |
+| **[legadox](https://github.com/bittencourtthulio/legadox)** | **camada** de segurança para código legado | o cartucho de migração alimenta o cálculo de raio; em área legada, quem manda é o `PERFIL.md` |
+| **stackx** *(este repositório)* | **camada** de convenções do repositório | — |
+| **[mergex](https://github.com/bittencourtthulio/mergex)** | entrega: branch, commit por task, PR e pacote de QA | tira do `CONVENCOES.md` as convenções de branch, commit e teste |
+| **[memox](https://github.com/bittencourtthulio/MemoX)** | **camada** de memória do projeto | fonte independente: as convenções não entram no índice dele |
+| **[prodx](https://github.com/bittencourtthulio/prodx)** | **camada** de produto: decide **se** há trabalho | fonte independente: convenção técnica não entra em veredito de produto |
+
+**Camadas** (`stackx`, `legadox`, `memox`, `prodx`) sozinhas não fazem nada — elas modificam o comportamento da `sprintx` e da `runx`. Sem `docs/stack/CONVENCOES.md`, nada muda: as irmãs se comportam como se comportariam sem esta skill.
+
+Detalhes do ecossistema inteiro no [README do expxdev](https://github.com/bittencourtthulio/expxdev).
+
+---
+
 ## O problema
 
 Peça a um assistente de IA para escrever um teste no seu projeto. Ele vai
@@ -262,6 +283,21 @@ Os prompts prontos para integrar cada skill estão em
 - **Não substitui revisão humana.** O `CONVENCOES.md` é gerado a partir de
   evidência e precisa ser revisado antes de governar.
 
+## Hooks e agente
+
+O `CONVENCOES.md` é um documento — e documento depende de o modelo lembrar de o ler. Dois hooks fecham essa lacuna, e **nenhum dos dois bloqueia nada**: esta é a skill mais discreta do ecossistema.
+
+| Hook | Quando | O que faz |
+|---|---|---|
+| `stackx/sem-convencoes.py` | ao abrir a sessão | se não existe `CONVENCOES.md` e o projeto tem código, sugere uma vez `/stackx-detectar` |
+| `stackx/aderencia.py` | depois de escrever | confere o arquivo recém-escrito contra as convenções e avisa o que destoou |
+
+Duas contenções deliberadas no hook de aderência: ponto marcado como **PROPOSTA nunca vira violação** — proposta não governa —, e o hook **se cala em arquivo antigo quando existe `docs/legado/PERFIL.md`**, para não empurrar a IA a "modernizar" código legado achando que obedece convenção. É a regra de precedência acima, aplicada em código.
+
+O agente **`cartografo`** roda em contexto próprio na detecção: varre o repositório e devolve o inventário FATO / EVIDÊNCIA / FORÇA que a Etapa 2 consome. Ele **não escreve o `CONVENCOES.md` e não decide conflito** — quem apresenta os dialetos e pergunta é a skill.
+
+Os dois hooks gravam no rastro append-only `docs/eventos/<trabalho_id>.jsonl`, seguindo o contrato `expx-eventos` v1 — é o que o painel de operação (`npx expxdev panel`) lê.
+
 ## Exemplos
 
 Em [`exemplos/`](exemplos/), com um projeto fictício:
@@ -292,3 +328,15 @@ Contribuição mais útil, em ordem:
 Antes de propor um cartucho novo, confira o critério: não óbvio, específico de
 versão ou engine, e caro de errar. Se o conteúdo virou tutorial de sintaxe, ele
 não passa — o modelo já sabe aquilo.
+
+---
+
+<div align="center">
+<sub>Parte do método <strong>Expx</strong> ·
+<a href="https://github.com/bittencourtthulio/expxdev">expxdev</a> ·
+<a href="https://github.com/bittencourtthulio/sprintx">sprintx</a> ·
+<a href="https://github.com/bittencourtthulio/runx">runx</a> ·
+<a href="https://github.com/bittencourtthulio/legadox">legadox</a> ·
+stackx ·
+<a href="https://github.com/bittencourtthulio/mergex">mergex</a></sub>
+</div>
