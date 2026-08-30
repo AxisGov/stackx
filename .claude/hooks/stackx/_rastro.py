@@ -36,14 +36,17 @@ def _trabalho_id(raiz):
     do_ambiente = os.environ.get("EXPX_TRABALHO_ID")
     if do_ambiente:
         return re.sub(r"[^A-Za-z0-9._-]", "-", do_ambiente)[:64]
-    lock = raiz / ".expx" / "lock.json"
-    try:
-        dados = json.loads(lock.read_text(encoding="utf-8"))
-        valor = dados.get("trabalho_id")
-        if valor:
-            return re.sub(r"[^A-Za-z0-9._-]", "-", str(valor))[:64]
-    except Exception:
-        pass
+    # O nome do arquivo e `expx-lock.json` — e o que o CLI grava (src/nucleo/
+    # lock.ts). Ler `lock.json` cai no except e devolve "sem-trabalho" para
+    # sempre, em silencio, porque a falha aqui e aberta por desenho.
+    for nome in ("expx-lock.json", "lock.json"):
+        try:
+            dados = json.loads((raiz / ".expx" / nome).read_text(encoding="utf-8"))
+            valor = dados.get("trabalho_id")
+            if valor:
+                return re.sub(r"[^A-Za-z0-9._-]", "-", str(valor))[:64]
+        except Exception:
+            continue
     return "sem-trabalho"
 
 
@@ -75,7 +78,9 @@ def registrar(evento, resultado, detalhe, arquivos=None, agente=None,
             "evento": evento,
             "fase": fase,
             "task": task,
-            "agente": agente,
+            # Sem subagente o valor e "principal", nunca null: o contrato trata
+            # "foi o modelo principal" como informacao, nao como ausencia.
+            "agente": agente or "principal",
             "resultado": resultado,
             "detalhe": detalhe,
             "arquivos": arquivos or [],
