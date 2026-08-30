@@ -15,6 +15,16 @@
   <img alt="licenca MIT" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-license.svg">
 </p>
 
+<p>
+  <a href="https://bittencourtthulio.github.io/expxdev/#stackx"><strong>📘 Documentação do método</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://bittencourtthulio.github.io/expxdev/#stackx">Etapas e cartuchos</a>
+  &nbsp;·&nbsp;
+  <a href="https://bittencourtthulio.github.io/expxdev/#ecossistema">O ecossistema</a>
+  &nbsp;·&nbsp;
+  <a href="https://bittencourtthulio.github.io/expxdev/#schema">Contratos</a>
+</p>
+
 <strong>A camada de convenções do método Expx</strong> — descobre e formaliza o dialeto<br>
 técnico do seu repositório para <a href="https://claude.com/claude-code">Claude Code</a> e <a href="https://opencode.ai">OpenCode</a>.
 
