@@ -56,8 +56,9 @@ O método Expx é um conjunto de skills que se compõem, instaladas e mantidas p
 | **[mergex](https://github.com/bittencourtthulio/mergex)** | entrega: branch, commit por task, PR e pacote de QA | tira do `CONVENCOES.md` as convenções de branch, commit e teste |
 | **[memox](https://github.com/bittencourtthulio/MemoX)** | **camada** de memória do projeto | fonte independente: as convenções não entram no índice dele |
 | **[prodx](https://github.com/bittencourtthulio/prodx)** | **camada** de produto: decide **se** há trabalho | fonte independente: convenção técnica não entra em veredito de produto |
+| **[buildx](https://github.com/bittencourtthulio/buildx)** | orquestra um projeto inteiro, da descrição ao sistema pronto | no B2 o stackx trabalha invertido: em projeto vazio não há convenção a detectar, então a `buildx` decide e o stackx registra, cada regra marcada `decidido_pelo_buildx` em vez de arquivo:linha; entregue a primeira feature, o `/stackx-detectar` normal roda e converte cada regra para a evidência real |
 
-**Camadas** (`stackx`, `legadox`, `memox`, `prodx`) sozinhas não fazem nada — elas modificam o comportamento da `sprintx` e da `runx`. Sem `docs/stack/CONVENCOES.md`, nada muda: as irmãs se comportam como se comportariam sem esta skill.
+**Camadas** (`stackx`, `legadox`, `memox`, `prodx`) sozinhas não fazem nada — elas modificam o comportamento da `sprintx` e da `runx`. Sem `docs/stack/CONVENCOES.md`, nada muda: as irmãs se comportam como se comportariam sem esta skill. A `buildx` inverte isso: é a única peça que **depende** de outras para rodar — o `stackx` segue opcional para ela, e sem ele o projeto novo apenas nasce sem convenção registrada.
 
 Detalhes do ecossistema inteiro no [README do expxdev](https://github.com/bittencourtthulio/expxdev).
 
@@ -344,6 +345,7 @@ não passa — o modelo já sabe aquilo.
 <div align="center">
 <sub>Parte do método <strong>Expx</strong> ·
 <a href="https://github.com/bittencourtthulio/expxdev">expxdev</a> ·
+<a href="https://github.com/bittencourtthulio/buildx">buildx</a> ·
 <a href="https://github.com/bittencourtthulio/sprintx">sprintx</a> ·
 <a href="https://github.com/bittencourtthulio/runx">runx</a> ·
 <a href="https://github.com/bittencourtthulio/legadox">legadox</a> ·
