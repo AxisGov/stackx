@@ -117,6 +117,28 @@ Consequências, e são absolutas:
   registra a contradição como `INFO` e diz que o PERFIL.md venceu. Não pergunte,
   não modernize.
 
+## Código copiado de módulo
+
+Código que veio de um módulo do `modulex` é verificado contra o `CONVENCOES.md`
+**deste** projeto, como qualquer outro código. Ter vindo pronto não o isenta.
+
+Mas a divergência se lê em duas categorias, e confundi-las é caro:
+
+| Divergência em item | É | O que fazer |
+| ------------------- | - | ----------- |
+| **traduzível** (coluna herdada do módulo) | violação normal | aponte, com a correção sugerida |
+| **essencial** ao terceiro (coluna essencial) | **não é violação a corrigir** | registre como o conflito da Etapa 6, e mande ao humano |
+
+**Esta distinção é obrigatória.** Sem ela, a verificação de aderência conserta o
+dialeto e quebra o funcionamento: um endpoint que o provedor precisa alcançar
+sem sessão vira "rota sem autenticação" na tabela de violações, alguém corrige
+"para ficar no padrão", e a integração para de receber — com o código em
+conformidade perfeita.
+
+Na dúvida sobre qual das duas categorias, rode a Etapa 6
+(`references/06-modulo.md`) sobre a seção 6 do `MODULO.md` antes de classificar.
+Não classifique por intuição: a coluna do módulo é a fonte.
+
 ## O que verificar, ponto a ponto
 
 Para cada item: só gera violação se a convenção correspondente tiver

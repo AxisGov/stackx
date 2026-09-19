@@ -52,6 +52,7 @@ Evidência: src/users/create-user.test.ts:14, src/orders/place-order.test.ts:9
 | ------- | ---------------------------------------------------- |
 | stackx  | o que **deve** ser seguido daqui pra frente          |
 | legadox | o que **existe** hoje, incluindo dialetos conflitantes |
+| modulex | o que **outro projeto** fez — como informação |
 
 Regra inegociável:
 
@@ -63,7 +64,13 @@ Regra inegociável:
 Sem essa regra a IA "moderniza" arquivo antigo achando que está obedecendo
 convenção — exatamente o colateral que o legadox proíbe.
 
-## As cinco etapas
+E o **módulo é insumo dos dois, nunca autoridade sobre nenhum**. A convenção
+herdada do sistema de origem não sobrepõe o `CONVENCOES.md` deste projeto, e
+não sobrepõe o padrão local de área legada. O que o módulo declara como
+**essencial ao terceiro** é restrição a respeitar; todo o resto é traduzido, ou
+é conflito que vai ao humano — nunca resolvido aqui. Detalhe na Etapa 6.
+
+## As seis etapas
 
 ### Etapa 1 — Detecção
 Roda no agente `cartografo` (ver abaixo). Varre o repositório e coleta evidência
@@ -97,6 +104,14 @@ corrige. Roda em duas formas: sob demanda (`/stackx-check`, completa) e contínu
 Redetecta e apresenta um DIFF entre o CONVENCOES.md atual e o que o repositório
 mostra hoje. Nunca sobrescreve em silêncio. Detalhe em
 `references/05-atualizacao.md`.
+
+### Etapa 6 — Dependência de stack de um módulo
+Etapa **de consulta**, não de detecção: recebe a seção 6 de um `MODULO.md` do
+`modulex` e devolve a tradução para este projeto e os conflitos. Traduz a coluna
+herdada com evidência de arquivo e linha, marca `PENDENTE` o que não tem
+equivalente — nunca preenche por analogia — e, no item essencial sem tradução,
+mostra as duas convenções e **cala**: conflito é decisão humana, na F2 do
+sprintx. Não altera o `CONVENCOES.md`. Detalhe em `references/06-modulo.md`.
 
 ## Os três cartuchos
 
@@ -186,6 +201,7 @@ positivo, e falso positivo mata a adoção de todos os hooks juntos.
 8. A verificação de aderência aponta, não corrige.
 9. Cartucho não repete o que o modelo já sabe. Se virou tutorial de sintaxe, foi escrito errado.
 10. Nenhum segredo, credencial ou dado real de cliente entra em CONVENCOES.md, exemplo ou template.
+11. Módulo do `modulex` é informação, nunca autoridade. A convenção herdada do sistema de origem não sobrepõe o `CONVENCOES.md` deste projeto, e item essencial ao terceiro que colide com ele é conflito reportado ao humano — nunca resolvido aqui, nem corrigido pela verificação de aderência.
 
 ## Mapa de etapas, references e templates
 
@@ -196,6 +212,7 @@ positivo, e falso positivo mata a adoção de todos os hooks juntos.
 | 3 — Conflito e lacuna | `references/03-conflito-e-lacuna.md` | `assets/TEMPLATE-conflito.md`, `assets/TEMPLATE-LACUNAS.md` → `docs/stack/LACUNAS.md` |
 | 4 — Aderência | `references/04-aderencia.md` | `assets/TEMPLATE-aderencia.md` |
 | 5 — Atualização | `references/05-atualizacao.md` | diff sobre `docs/stack/CONVENCOES.md` |
+| 6 — Dependência de stack de módulo | `references/06-modulo.md` | tradução e conflitos, no chat — não escreve arquivo |
 
 | Componente | Arquivo |
 | ---------- | ------- |
@@ -211,6 +228,7 @@ positivo, e falso positivo mata a adoção de todos os hooks juntos.
 | sprintx | `references/integracao/sprintx.md` |
 | runx | `references/integracao/runx.md` |
 | legadox | `references/integracao/legadox.md` |
+| modulex | `references/06-modulo.md` (etapa de consulta) |
 
 ## Comandos
 
