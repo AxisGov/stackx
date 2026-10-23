@@ -58,13 +58,17 @@ transação longa aberta na tabela, você entra na fila e trava a aplicação. D
 BEGIN;
 SET LOCAL lock_timeout = '3s';  -- válido somente nesta transação
 ALTER TABLE pedidos ADD COLUMN rastreio text;
+SET LOCAL lock_timeout = DEFAULT;  -- não limita os passos seguintes
 COMMIT;
 ```
 
 Em conexão reutilizada por pool, evite `SET lock_timeout` sem `LOCAL`:
 ele permanece ativo na sessão e pode fazer consultas normais expirarem.
-Se a ferramenta de migração já abriu uma transação, execute apenas o
-`SET LOCAL` e o `ALTER TABLE` dentro dela, sem abrir outra transação.
+Prefira uma transação dedicada ao DDL. Se a ferramenta de migração já abriu
+uma transação maior, execute `SET LOCAL` imediatamente antes do comando
+protegido e restaure `lock_timeout` para `DEFAULT` logo depois; o valor
+local permaneceria ativo até `COMMIT` ou `ROLLBACK` e poderia limitar
+locks de passos seguintes.
 
 **Default não volátil em PostgreSQL 11+:** `DEFAULT now()` é estável
 (não volátil), assim como `CURRENT_TIMESTAMP`: o valor é calculado uma vez
@@ -244,11 +248,24 @@ PRAGMA foreign_key_check;
 pode falhar ou, pior, cascatear deleção. No procedimento de reconstrução,
 `PRAGMA foreign_keys=OFF` deve ser executado **antes** de `BEGIN`, na mesma
 conexão, pois dentro de uma transação ou `SAVEPOINT` essa configuração não
-faz efeito. Após copiar, recriar índices/triggers/views e remover a tabela
-antiga, execute `PRAGMA foreign_key_check` **antes do COMMIT**; somente depois
-de `COMMIT` restaure `PRAGMA foreign_keys=ON` e confirme seu valor. Se o
-framework já abriu uma transação, não tente desligar FK nela: ajuste a
-configuração do executor de migrações ou use procedimento compatível com
+faz efeito:
+
+```sql
+PRAGMA foreign_keys=OFF;
+BEGIN;
+-- criar tabela nova, copiar dados e recriar índices, triggers e views
+PRAGMA foreign_key_check;  -- deve retornar ZERO linhas
+COMMIT;                    -- somente se o check estiver vazio
+PRAGMA foreign_keys=ON;
+PRAGMA foreign_keys;       -- deve retornar 1
+```
+
+Se a reconstrução falhar ou o check retornar qualquer linha, execute
+`ROLLBACK` e, **antes de devolver a conexão ao pool**, também execute
+`PRAGMA foreign_keys=ON` e confirme que `PRAGMA foreign_keys` retorna `1`.
+A restauração é obrigatória tanto após `COMMIT` quanto após `ROLLBACK`.
+Se o framework já abriu uma transação, não tente desligar FK nela: ajuste
+a configuração do executor de migrações ou use procedimento compatível com
 as restrições habilitadas. `legacy_alter_table` não substitui o controle
 de integridade referencial. Desligar e esquecer de checar pode corromper
 integridade sem erro visível.

@@ -59,6 +59,17 @@ def e_gerado(rel):
     return any(nome.endswith(s) for s in SUFIXOS_GERADOS)
 
 
+def caminho_da_entrada(entrada):
+    """Extrai o arquivo alterado de qualquer ferramenta de escrita suportada."""
+    return (
+        entrada.get("file_path")
+        or entrada.get("notebook_path")
+        or entrada.get("path")
+        or entrada.get("filePath")
+        or entrada.get("notebookPath")
+    )
+
+
 def secoes(texto):
     """Divide o CONVENCOES.md em seções de título '## n. Nome'."""
     partes = re.split(r"^##\s+", texto, flags=re.M)
@@ -182,7 +193,7 @@ def main():
         return 0
 
     entrada = evento.get("tool_input") or {}
-    bruto = entrada.get("file_path") or entrada.get("path") or entrada.get("filePath")
+    bruto = caminho_da_entrada(entrada)
     if not bruto:
         return 0
 
