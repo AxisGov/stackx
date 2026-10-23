@@ -66,7 +66,7 @@ convenção — exatamente o colateral que o legadox proíbe.
 ## As cinco etapas
 
 ### Etapa 1 — Detecção
-Roda no agente `cartografo` (ver abaixo). Varre o repositório e coleta evidência
+Roda no agente `stackx-cartografo` (ver abaixo). Varre o repositório e coleta evidência
 real, nesta ordem: manifestos e locks →
 configuração de runner/lint/formatador/type checker/build → **os testes que já
 existem** (a fonte mais rica) → migrações e schema → scripts dos manifestos →
@@ -117,7 +117,7 @@ CONVENCOES.md. Comportamento varia por versão.
 Esta é a skill com **menos** hooks, e isso é intencional: ela produz o arquivo que
 as outras consultam. O papel dela na camada de hooks é ser a fonte de verdade.
 
-### O agente `cartografo`
+### O agente `stackx-cartografo`
 
 A Etapa 1 roda em agente próprio, compartilhado com o legadox (prompt diferente
 por skill: aqui o alvo é extrair convenção; lá, montar perfil e zonas de risco).
@@ -132,7 +132,7 @@ O uso do histórico é o que faz o agente valer: é ele que diz qual dialeto é 
 mais **recente**, não só o mais numeroso. Sem isso o agente cristaliza o legado
 como convenção oficial — o erro que a skill inteira existe para evitar.
 
-Arquivos: `.claude/agents/cartografo.md`, `.opencode/agent/cartografo.md`.
+Arquivos: `.claude/agents/stackx-cartografo.md`, `.opencode/agent/stackx-cartografo.md`.
 
 ### Os dois hooks
 
@@ -199,7 +199,7 @@ positivo, e falso positivo mata a adoção de todos os hooks juntos.
 
 | Componente | Arquivo |
 | ---------- | ------- |
-| Agente `cartografo` | `.claude/agents/cartografo.md` · `.opencode/agent/cartografo.md` |
+| Agente `stackx-cartografo` | `.claude/agents/stackx-cartografo.md` · `.opencode/agent/stackx-cartografo.md` |
 | Hook `aderencia` | `.claude/hooks/stackx/aderencia.py` |
 | Hook `sem-convencoes` | `.claude/hooks/stackx/sem-convencoes.py` |
 | Rastro de eventos | `.claude/hooks/stackx/_rastro.py` → `docs/eventos/<trabalho_id>.jsonl` |

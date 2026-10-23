@@ -63,7 +63,7 @@ e nenhum bloqueia ação.
 
 | Componente | Quando roda | O que faz |
 | ---------- | ----------- | --------- |
-| agente `cartografo` | Etapa 1 (`/stackx-detectar`, `/stackx-atualizar`) | varre o repositório em contexto próprio e devolve o inventário de evidência; não escreve arquivo |
+| agente `stackx-cartografo` | Etapa 1 (`/stackx-detectar`, `/stackx-atualizar`) | varre o repositório em contexto próprio e devolve o inventário de evidência; não escreve arquivo |
 | hook `sem-convencoes` | início de sessão | sem `CONVENCOES.md` e com código no projeto, injeta uma linha sugerindo a detecção |
 | hook `aderencia` | depois de cada escrita de arquivo | confere nome de arquivo de teste contra o padrão declarado, e segredo literal |
 
