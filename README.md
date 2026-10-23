@@ -305,7 +305,7 @@ O `CONVENCOES.md` é um documento — e documento depende de o modelo lembrar de
 
 Duas contenções deliberadas no hook de aderência: ponto marcado como **PROPOSTA nunca vira violação** — proposta não governa —, e o hook **se cala em arquivo antigo quando existe `docs/legado/PERFIL.md`**, para não empurrar a IA a "modernizar" código legado achando que obedece convenção. É a regra de precedência acima, aplicada em código.
 
-O agente **`cartografo`** roda em contexto próprio na detecção: varre o repositório e devolve o inventário FATO / EVIDÊNCIA / FORÇA que a Etapa 2 consome. Ele **não escreve o `CONVENCOES.md` e não decide conflito** — quem apresenta os dialetos e pergunta é a skill.
+O agente **`stackx-cartografo`** roda em contexto próprio na detecção: varre o repositório e devolve o inventário FATO / EVIDÊNCIA / FORÇA que a Etapa 2 consome. Ele **não escreve o `CONVENCOES.md` e não decide conflito** — quem apresenta os dialetos e pergunta é a skill.
 
 Os dois hooks gravam no rastro append-only `docs/eventos/<trabalho_id>.jsonl`, seguindo o contrato `expx-eventos` v1 — é o que o painel de operação (`npx expxdev panel`) lê.
 

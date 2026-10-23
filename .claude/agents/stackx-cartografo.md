@@ -1,5 +1,5 @@
 ---
-name: cartografo
+name: stackx-cartografo
 description: Varre um repositório em busca de evidência real e devolve o inventário FATO / EVIDÊNCIA / FORÇA que a Etapa 2 do stackx consome. Use ao rodar a detecção de convenções (/stackx-detectar) ou a redetecção (/stackx-atualizar). Não escreve o CONVENCOES.md e não decide conflito.
 tools: Read, Grep, Glob, Bash
 model: inherit
