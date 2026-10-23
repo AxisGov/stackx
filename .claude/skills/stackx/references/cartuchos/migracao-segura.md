@@ -55,12 +55,26 @@ versão mais cara deste cartucho.
 transação longa aberta na tabela, você entra na fila e trava a aplicação. Daí:
 
 ```sql
-SET lock_timeout = '3s';   -- falhe rápido, tente de novo
+BEGIN;
+SET LOCAL lock_timeout = '3s';  -- válido somente nesta transação
 ALTER TABLE pedidos ADD COLUMN rastreio text;
+SET LOCAL lock_timeout = DEFAULT;  -- não limita os passos seguintes
+COMMIT;
 ```
 
-**Default volátil continua reescrevendo.** `DEFAULT now()`, `DEFAULT gen_random_uuid()`
-não são constantes: reescrevem. Adicione a coluna sem default e preencha depois.
+Em conexão reutilizada por pool, evite `SET lock_timeout` sem `LOCAL`:
+ele permanece ativo na sessão e pode fazer consultas normais expirarem.
+Prefira uma transação dedicada ao DDL. Se a ferramenta de migração já abriu
+uma transação maior, execute `SET LOCAL` imediatamente antes do comando
+protegido e restaure `lock_timeout` para `DEFAULT` logo depois; o valor
+local permaneceria ativo até `COMMIT` ou `ROLLBACK` e poderia limitar
+locks de passos seguintes.
+
+**Default não volátil em PostgreSQL 11+:** `DEFAULT now()` é estável
+(não volátil), assim como `CURRENT_TIMESTAMP`: o valor é calculado uma vez
+e armazenado nos metadados, sem reescrita. Já defaults voláteis, como
+`gen_random_uuid()` ou `clock_timestamp()`, exigem reescrita. Para esses,
+adicione a coluna sem default e preencha depois.
 
 ### Alterações que reescrevem a tabela (caras)
 
@@ -231,10 +245,30 @@ PRAGMA foreign_key_check;
 ```
 
 **Chave estrangeira durante a recriação:** com `foreign_keys=ON`, a recriação
-pode falhar ou, pior, cascatear deleção. O procedimento correto usa
-`PRAGMA legacy_alter_table` / desliga FK durante a operação e roda
-`foreign_key_check` antes de commitar. Desligar e esquecer de checar é como se
-corrompe integridade sem erro visível.
+pode falhar ou, pior, cascatear deleção. No procedimento de reconstrução,
+`PRAGMA foreign_keys=OFF` deve ser executado **antes** de `BEGIN`, na mesma
+conexão, pois dentro de uma transação ou `SAVEPOINT` essa configuração não
+faz efeito:
+
+```sql
+PRAGMA foreign_keys=OFF;
+BEGIN;
+-- criar tabela nova, copiar dados e recriar índices, triggers e views
+PRAGMA foreign_key_check;  -- deve retornar ZERO linhas
+COMMIT;                    -- somente se o check estiver vazio
+PRAGMA foreign_keys=ON;
+PRAGMA foreign_keys;       -- deve retornar 1
+```
+
+Se a reconstrução falhar ou o check retornar qualquer linha, execute
+`ROLLBACK` e, **antes de devolver a conexão ao pool**, também execute
+`PRAGMA foreign_keys=ON` e confirme que `PRAGMA foreign_keys` retorna `1`.
+A restauração é obrigatória tanto após `COMMIT` quanto após `ROLLBACK`.
+Se o framework já abriu uma transação, não tente desligar FK nela: ajuste
+a configuração do executor de migrações ou use procedimento compatível com
+as restrições habilitadas. `legacy_alter_table` não substitui o controle
+de integridade referencial. Desligar e esquecer de checar pode corromper
+integridade sem erro visível.
 
 **`ADD COLUMN` com default não-constante** (`CURRENT_TIMESTAMP`) é rejeitado —
 por design, porque exigiria reescrever linhas existentes.
