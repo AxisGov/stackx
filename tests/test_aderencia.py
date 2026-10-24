@@ -42,6 +42,12 @@ class SegredoAparenteTest(unittest.TestCase):
     def test_leitura_de_ambiente_nao_e_segredo(self):
         self.assertIsNone(MODULO.linha_de_segredo('API_KEY = os.environ.get("API_KEY", "abcdefgh12")\n'))
 
+    def test_interpolacao_de_ambiente_casa_a_regex_e_nao_e_segredo(self):
+        # Casa com SEGREDO (valor entre aspas com 8+ caracteres): quem decide e a exclusao.
+        linha = 'TOKEN: "${process.env.TOKEN}"\n'
+        self.assertIsNotNone(MODULO.SEGREDO.search(linha))
+        self.assertIsNone(MODULO.linha_de_segredo(linha))
+
 
 if __name__ == "__main__":
     unittest.main()
