@@ -12,8 +12,8 @@ Acione a skill **stackx** e execute as Etapas 1 e 2.
 
 2. **Etapa 3 — Conflitos, antes de escrever.** Se houver conflito, siga
    `references/03-conflito-e-lacuna.md` e **pergunte**, apresentando todos de uma
-   vez com contagem, localização e as três datas do histórico. Não escolha
-   sozinho, nem por maioria.
+   vez com contagem, localização e as três datas do histórico (sem `.git`, diga
+   que não há datação). Não escolha sozinho, nem por maioria.
 
 3. **Etapa 2 — Escrita.** Siga `references/02-convencoes.md`, a partir de
    `assets/TEMPLATE-CONVENCOES.md`, gerando `docs/stack/CONVENCOES.md`.

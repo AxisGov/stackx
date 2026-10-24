@@ -100,6 +100,7 @@ Etapa 2 precisa dela para não escrever com falsa confiança.
 - [ ] Nenhuma versão escrita como faixa quando o lock tinha a exata.
 - [ ] Todo comando veio de manifesto, script, Makefile ou CI — nenhum inferido
       do nome do framework.
-- [ ] Cada conflito com contagem, localização e as três datas do histórico.
+- [ ] Cada conflito com contagem, localização e as três datas do histórico (sem `.git`,
+      o aviso explícito de que não há datação).
 - [ ] Nenhum segredo, valor de ambiente ou dado de cliente na resposta.
 - [ ] Você não escreveu nenhum arquivo.
