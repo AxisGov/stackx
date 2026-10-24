@@ -31,6 +31,23 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from _rastro import _raiz, modo, registrar  # noqa: E402
 
+SEGREDO = re.compile(r"(SECRET|PASSWORD|API_KEY|TOKEN|PRIVATE_KEY)\s*[:=]\s*['\"][^'\"]{8,}")
+
+
+def linha_de_segredo(conteudo):
+    """Numero (1-based) da primeira linha com credencial literal aparente, ou None.
+
+    Varre o arquivo inteiro: credencial abaixo de um corte fixo de linhas
+    passaria calada.
+    """
+    for n, linha in enumerate(conteudo.splitlines(), 1):
+        if SEGREDO.search(linha):
+            if "process.env" in linha or "os.environ" in linha or "getenv" in linha:
+                continue
+            return n
+    return None
+
+
 FERRAMENTAS = {"Write", "Edit", "MultiEdit", "NotebookEdit", "write", "edit", "patch"}
 
 MARCA_PROPOSTA = "**PROPOSTA**"
@@ -251,15 +268,12 @@ def main():
     # --- 2. Segredo aparente (vale sempre, independe de convenção) ---
     try:
         conteudo = (raiz / rel).read_text(encoding="utf-8", errors="replace")
-        for n, linha in enumerate(conteudo.splitlines()[:400], 1):
-            if re.search(r"(SECRET|PASSWORD|API_KEY|TOKEN|PRIVATE_KEY)\s*[:=]\s*['\"][^'\"]{8,}", linha):
-                if "process.env" in linha or "os.environ" in linha or "getenv" in linha:
-                    continue
-                violacoes.append((
-                    "segredo aparente",
-                    f"{rel}:{n} parece conter credencial literal. Leia de configuracao, nunca do codigo.",
-                ))
-                break
+        n = linha_de_segredo(conteudo)
+        if n is not None:
+            violacoes.append((
+                "segredo aparente",
+                f"{rel}:{n} parece conter credencial literal. Leia de configuracao, nunca do codigo.",
+            ))
     except Exception:
         pass
 
