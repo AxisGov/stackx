@@ -90,7 +90,8 @@ Qual adotar para código novo?
 
 ## Critério de saída (conflito)
 
-- [ ] Todo conflito foi apresentado com as três datas e a contagem.
+- [ ] Todo conflito foi apresentado com a contagem e as três datas — ou, sem `.git`,
+      com o aviso explícito de que não há datação.
 - [ ] Nenhum conflito foi resolvido sem resposta do usuário.
 - [ ] Cada decisão foi gravada com autor e data.
 - [ ] Conflitos não respondidos estão como CONFLITO EM ABERTO no CONVENCOES.md

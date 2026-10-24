@@ -449,7 +449,8 @@ A Etapa 1 termina quando **todas** valem:
 - [ ] Nenhuma versão foi escrita como faixa quando o lock tinha a exata.
 - [ ] Todo comando anotado veio de manifesto, script, Makefile ou CI — nenhum
       inferido do nome do framework.
-- [ ] Cada conflito tem contagem, localização e as três datas do histórico.
+- [ ] Cada conflito tem contagem, localização e as três datas do histórico (sem `.git`,
+      o registro explícito de que não há datação).
 - [ ] Nenhum valor de variável de ambiente, credencial ou dado de cliente foi
       copiado para o inventário.
 
