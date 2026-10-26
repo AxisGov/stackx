@@ -44,6 +44,20 @@ class ConflitoComNDialetosTest(unittest.TestCase):
                 self.assertNotIn("de duas formas", texto)
                 self.assertNotRegex(texto, r"opções reais encontradas \+ \"manter os dois")
 
+    def test_nenhum_texto_do_repositorio_fala_em_duas_formas(self):
+        # O contrato é de dois ou mais dialetos em todo o repositório, não só na skill: README,
+        # integração e exemplos repetiam "de duas formas" (revisão do Codex). O exemplo real de
+        # conflito continua com dois dialetos — o que muda é a definição, não o exemplo.
+        raiz = Path(__file__).parents[1]
+        achados = []
+        for arquivo in sorted(raiz.rglob("*.md")):
+            if ".git" in arquivo.parts:
+                continue
+            for n, linha in enumerate(arquivo.read_text(encoding="utf-8").splitlines(), 1):
+                if re.search(r"(faz|fazer)( a mesma coisa| isto)? de duas formas", linha):
+                    achados.append(f"{arquivo.relative_to(raiz)}:{n}")
+        self.assertEqual(achados, [])
+
     def test_template_repete_por_dialeto_e_ordena_dialetos_manter_adiar(self):
         self.assertIn("uma linha por dialeto", TEMPLATE)
         self.assertIn("um exemplo por dialeto", TEMPLATE)

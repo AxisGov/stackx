@@ -44,7 +44,7 @@ arquivo está errado.
    arquivo novo. Nunca alinhe arquivo existente à convenção.
 
 Existe ainda o marcador `> **CONFLITO EM ABERTO**`, para pontos em que o
-repositório faz de duas formas e a decisão não foi tomada. Trate como PROPOSTA:
+repositório faz de mais de uma forma e a decisão não foi tomada. Trate como PROPOSTA:
 não governa, e vira decisão a levantar.
 
 ═══════════════════════════════════════════════════════════════════════

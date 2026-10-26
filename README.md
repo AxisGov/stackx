@@ -149,7 +149,7 @@ Cada seção termina com a evidência que a sustenta.
 Duas situações recebem tratamento explícito, e são as que separam o stackx de uma
 varredura ingênua.
 
-**Conflito.** O repositório faz a mesma coisa de duas formas. O stackx **não
+**Conflito.** O repositório faz a mesma coisa de mais de uma forma. O stackx **não
 escolhe sozinho**: lista cada dialeto com quantos arquivos o seguem, onde vivem,
 quando nasceram e quando receberam o último arquivo novo — e pergunta qual adotar.
 
