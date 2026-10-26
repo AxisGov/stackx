@@ -56,8 +56,9 @@ a pergunta vai sem sugestão de ordem.
 1. Monte o bloco a partir de `assets/TEMPLATE-conflito.md`.
 2. Apresente **todos** os conflitos de uma vez, numerados. Não pergunte um por
    mensagem.
-3. Para cada um, ofereça as opções reais encontradas + "manter os dois, decidir
-   por área" + "adiar". Nunca ofereça uma opção que não existe no repositório.
+3. Para cada um, ofereça uma opção por dialeto encontrado + "manter os dois,
+   decidir por área" (com três ou mais dialetos, "manter vários, decidir por
+   área") + "adiar". Nunca ofereça uma opção que não existe no repositório.
 4. Você **pode** apontar o sinal do histórico ("o dialeto B concentra os
    arquivos dos últimos 6 meses") — isso é evidência, não escolha. **Não**
    escreva "recomendo B".
@@ -67,6 +68,14 @@ a pergunta vai sem sugestão de ordem.
 
 ## Formato exato da apresentação
 
+Um conflito tem **dois ou mais dialetos**, e cada dialeto encontrado ganha uma
+linha na tabela (A, B, C, …), um exemplo (`Exemplo A:`, `Exemplo B:`, …) e uma
+opção numerada. Depois das opções dos dialetos vêm sempre as duas fixas, nesta
+ordem: "manter os dois, decidir por área" (com três ou mais: "manter vários,
+decidir por área") e "adiar — fica como CONFLITO EM ABERTO". Com `n` dialetos, as
+fixas são `(n+1)` e `(n+2)`. Nenhum dialeto encontrado fica de fora, e nenhum que
+não existe no repositório entra.
+
 ```markdown
 ### CONFLITO 1 — Local do arquivo de teste
 
@@ -74,18 +83,22 @@ a pergunta vai sem sugestão de ordem.
 | ------- | -------- | ---- | ------- | ----------- | ------------ |
 | A — co-localizado | 34 | `src/**/*.test.ts` | 2022-03 | 2024-01 | 2024-06 |
 | B — pasta espelhada | 9 | `tests/**/*.test.ts` | 2025-02 | 2025-08 | 2025-08 |
+| C — pasta `__tests__` | 6 | `src/**/__tests__/*.ts` | 2023-05 | 2024-11 | 2025-03 |
 
 Exemplo A: `src/users/create-user.test.ts:1`
 Exemplo B: `tests/orders/place-order.test.ts:1`
+Exemplo C: `src/billing/__tests__/invoice.ts:1`
 
 Sinal do histórico: o dialeto A não recebe arquivo novo há 19 meses; todos os
-arquivos criados nos últimos 6 meses seguem B.
+arquivos criados nos últimos 6 meses seguem B; o C não recebe arquivo novo há 11
+meses.
 
 Qual adotar para código novo?
   (1) A — co-localizado
   (2) B — pasta espelhada
-  (3) manter os dois, decidir por área
-  (4) adiar — fica como CONFLITO EM ABERTO
+  (3) C — pasta `__tests__`
+  (4) manter vários, decidir por área
+  (5) adiar — fica como CONFLITO EM ABERTO
 ```
 
 ## Critério de saída (conflito)

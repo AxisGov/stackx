@@ -80,7 +80,7 @@ camadas; padrões de código com consequência. Cada seção termina com a evid�
 Detalhe em `references/02-convencoes.md`.
 
 ### Etapa 3 — Conflito e lacuna
-**Conflito**: o repositório faz a mesma coisa de duas formas → lista cada dialeto
+**Conflito**: o repositório faz a mesma coisa de mais de uma forma → lista cada dialeto
 com contagem, localização e data no histórico, e **pergunta**. **Lacuna**: sem
 evidência sobre um ponto → `docs/stack/LACUNAS.md` com o impacto de não saber
 aquilo, e no máximo uma PROPOSTA marcada no CONVENCOES.md. Detalhe em
