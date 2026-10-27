@@ -80,7 +80,7 @@ novembro de 2024.
 **CONFLITO 1 — adiado (opção 4).** Gravado em `docs/stack/CONVENCOES.md` §3:
 
 ```markdown
-> **CONFLITO EM ABERTO** — o repositório faz isto de duas formas. Ver
+> **CONFLITO EM ABERTO** — o repositório faz isto de mais de uma forma. Ver
 > `docs/stack/LACUNAS.md`. Enquanto não houver decisão, siga o padrão do
 > arquivo vizinho e registre a escolha na task.
 ```

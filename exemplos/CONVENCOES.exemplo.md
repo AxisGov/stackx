@@ -62,7 +62,7 @@ Nenhum alvo ficou sem origem. A cobertura roda só em `main`, não em PR
 | Marcação de teste lento ou de integração | Sufixo `.integration.test.ts`, projeto separado em `vitest.config.ts:19` |
 | Paralelismo do runner | `pool: 'forks'`, 4 workers (`vitest.config.ts:11`) |
 
-> **CONFLITO EM ABERTO** — o repositório faz isto de duas formas. Ver
+> **CONFLITO EM ABERTO** — o repositório faz isto de mais de uma forma. Ver
 > `docs/stack/LACUNAS.md`. Enquanto não houver decisão, siga o padrão do
 > arquivo vizinho e registre a escolha na task.
 >

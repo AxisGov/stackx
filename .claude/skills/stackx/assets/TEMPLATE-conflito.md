@@ -20,9 +20,11 @@ permitido; escrever "recomendo B" é escolha e não é.
 | ------- | -------- | ---- | ------- | ----------- | ------------ |
 | A — <descrição> | <n> | `<glob>` | <AAAA-MM> | <AAAA-MM> | <AAAA-MM> |
 | B — <descrição> | <n> | `<glob>` | <AAAA-MM> | <AAAA-MM> | <AAAA-MM> |
+| <…> | <uma linha por dialeto encontrado: C, D, …> | | | | |
 
 Exemplo A: `<caminho:linha>`
 Exemplo B: `<caminho:linha>`
+<… um exemplo por dialeto encontrado: Exemplo C, Exemplo D, …>
 
 **Sinal do histórico:**
 <!-- Fato observado, sem recomendação.
@@ -39,8 +41,9 @@ Exemplo B: `<caminho:linha>`
 ```
 (1) A — <descrição>
 (2) B — <descrição>
-(3) manter os dois, decidir por área
-(4) adiar — fica como CONFLITO EM ABERTO
+(<n>) <letra> — <descrição>   (uma opção por dialeto encontrado, na ordem da tabela)
+(<n+1>) manter os dois, decidir por área   (com três ou mais dialetos: manter vários, decidir por área)
+(<n+2>) adiar — fica como CONFLITO EM ABERTO
 ```
 
 <!-- Só ofereça opções que existem no repositório. Nunca ofereça uma terceira
@@ -64,7 +67,7 @@ E acrescente a linha na tabela "Decisões registradas".
 **Adiado:** grave no CONVENCOES.md o bloco literal:
 
 ```markdown
-> **CONFLITO EM ABERTO** — o repositório faz isto de duas formas. Ver
+> **CONFLITO EM ABERTO** — o repositório faz isto de mais de uma forma. Ver
 > `docs/stack/LACUNAS.md`. Enquanto não houver decisão, siga o padrão do
 > arquivo vizinho e registre a escolha na task.
 ```
