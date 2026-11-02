@@ -157,3 +157,16 @@ arquivos, para que grep funcione.
 sem sugestão de ordem. A limitação é registrada no CONVENCOES.md.
 **Por quê:** a falta de histórico degrada a qualidade da pergunta, mas não
 justifica adotar o majoritário — que é justamente o erro que a datação evita.
+
+### D-19 — Classe do cartógrafo
+**Ambiguidade:** com `.expx/orquestracao.json` ativo, o `expx init` 0.13.0 falhava
+com `sem_classe` no `stackx-cartografo`, porque `model: inherit` não tem classe
+(relato do Conselhos, 2026-11-02).
+**Decisão:** `classe: raciocinio_normal` no frontmatter de
+`.claude/agents/stackx-cartografo.md`; `tests/test_classe_dos_agentes.py` a exige.
+A cópia de `.opencode/agent/` fica como está, porque o `expx init` não instala os
+agentes do OpenCode.
+**Por quê:** o cartógrafo extrai evidência e não decide conflito: é raciocínio
+normal. A classe é da skill, e a camada do projeto só eleva. Sem política, nada
+muda, porque o Claude Code ignora a chave. Com política, o agente deixa de herdar
+o modelo da sessão e recebe a cadeia da classe.
