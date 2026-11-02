@@ -170,3 +170,13 @@ agentes do OpenCode.
 normal. A classe é da skill, e a camada do projeto só eleva. Sem política, nada
 muda, porque o Claude Code ignora a chave. Com política, o agente deixa de herdar
 o modelo da sessão e recebe a cadeia da classe.
+
+### D-20 — Onde o cartógrafo procura o roteiro
+**Ambiguidade:** a busca alternativa do `stackx-cartografo` citava
+`.opencode/skill/stackx/`, que nenhuma instalação cria, e repetia o caminho
+principal (CodeAnt no expxdev#130).
+**Decisão:** a alternativa é `.expx/marketplace/plugins/expx/skills/stackx/`, a
+cópia do plugin do `expx init`; `tests/test_caminho_do_roteiro.py` a exige.
+**Por quê:** as skills ficam em `.claude/skills/` nos dois harnesses, e o
+OpenCode lê essa pasta nativamente. Se ela faltar, a única outra cópia que
+existe é a do plugin.
