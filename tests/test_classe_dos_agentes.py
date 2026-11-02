@@ -20,13 +20,19 @@ def frontmatter(texto):
 
 
 class ClasseDosAgentesTest(unittest.TestCase):
+    def test_frontmatter_aberto_nao_conta_e_comentario_sai_do_valor(self):
+        self.assertEqual(frontmatter("---\nname: x\n\nclasse: raciocinio_normal\n"), "")
+        m = re.search(r"^classe:[ \t]*(\S+)(?:[ \t]+#.*)?[ \t]*$", frontmatter("---\nclasse: raciocinio_normal # nota\n---\n"), re.M)
+        self.assertEqual(m.group(1), "raciocinio_normal")
+
     def test_ha_agentes(self):
         self.assertTrue(AGENTES)
 
     def test_todo_agente_declara_classe_do_vocabulario(self):
         for agente in AGENTES:
             with self.subTest(agente=agente.name):
-                m = re.search(r"^classe:\s*(\S+)\s*$", frontmatter(agente.read_text(encoding="utf-8")), re.M)
+                # comentário no fim da linha é YAML válido e sai do valor
+                m = re.search(r"^classe:[ \t]*(\S+)(?:[ \t]+#.*)?[ \t]*$", frontmatter(agente.read_text(encoding="utf-8")), re.M)
                 self.assertIsNotNone(m, f"{agente.name} sem classe:")
                 self.assertIn(m.group(1), CLASSES)
 
