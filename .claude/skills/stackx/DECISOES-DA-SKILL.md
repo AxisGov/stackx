@@ -180,3 +180,17 @@ cópia do plugin do `expx init`; `tests/test_caminho_do_roteiro.py` a exige.
 **Por quê:** as skills ficam em `.claude/skills/` nos dois harnesses, e o
 OpenCode lê essa pasta nativamente. Se ela faltar, a única outra cópia que
 existe é a do plugin.
+
+### D-21 — Papel do cartógrafo
+**Ambiguidade:** na F4 da orquestração, o ExpxDev vai deixar de escolher por uma
+lista de nomes quais agentes passam pela integridade final e rodam em primeiro
+plano, e vai decidir pelo `papel:` que a skill declara (CONTRATO-expx-orquestracao
+§2.2, §12.2 e §13.1). Que papel o `stackx-cartografo` tem?
+**Decisão:** `papel: investigar` no frontmatter de
+`.claude/agents/stackx-cartografo.md`; `tests/test_papel_dos_agentes.py` exige o
+papel decidido. A cópia de `.opencode/agent/` fica como está, como na D-19.
+**Por quê:** o cartógrafo levanta evidência e não julga entrega: não é `revisar`
+nem `testar`, e por isso não vai entrar na integridade final nem no primeiro plano. O
+teste exige o papel decidido, e não só um valor do vocabulário, porque trocar o
+papel de um agente muda a garantia. Sem a versão do ExpxDev que lê o papel, nada
+muda: o Claude Code ignora a chave.
