@@ -23,15 +23,25 @@ def frontmatter(texto):
 
 
 def papel(texto):
-    # comentário no fim da linha é YAML válido e sai do valor
-    m = re.search(r"^papel:[ \t]*(\S+)(?:[ \t]+#.*)?[ \t]*$", frontmatter(texto), re.M)
-    return m.group(1) if m else None
+    # Como o YAML lê a linha: `papel:x` sem espaço não é a chave, as aspas delimitam
+    # o valor, e o comentário no fim sai dele.
+    m = re.search(r"^papel:[ \t]+(\S+)(?:[ \t]+#.*)?[ \t]*$", frontmatter(texto), re.M)
+    if not m:
+        return None
+    v = m.group(1)
+    return v[1:-1] if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'" else v
 
 
 class PapelDosAgentesTest(unittest.TestCase):
     def test_frontmatter_aberto_nao_conta_e_comentario_sai_do_valor(self):
         self.assertIsNone(papel("---\nname: x\n\npapel: investigar\n"))
         self.assertEqual(papel("---\npapel: investigar # nota\n---\n"), "investigar")
+
+    def test_valor_entre_aspas_e_o_mesmo_e_sem_espaco_nao_e_chave(self):
+        # YAML: as aspas delimitam o valor; `papel:x` sem espaço é um texto, não a chave
+        self.assertEqual(papel('---\npapel: "investigar"\n---\n'), "investigar")
+        self.assertEqual(papel("---\npapel: 'investigar' # nota\n---\n"), "investigar")
+        self.assertIsNone(papel("---\npapel:investigar\n---\n"))
 
     def test_ha_agentes(self):
         self.assertTrue(AGENTES)
