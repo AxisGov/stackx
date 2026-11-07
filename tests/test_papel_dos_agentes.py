@@ -25,10 +25,12 @@ def frontmatter(texto):
 def papel(texto):
     # Como o YAML lê a linha: `papel:x` sem espaço não é a chave, as aspas delimitam
     # o valor, e o comentário no fim sai dele.
-    m = re.search(r"^papel:[ \t]+(\S+)(?:[ \t]+#.*)?[ \t]*$", frontmatter(texto), re.M)
-    if not m:
+    linhas = re.findall(r"^papel:[ \t]+(\S+)(?:[ \t]+#.*)?[ \t]*$", frontmatter(texto), re.M)
+    if len(linhas) > 1:
+        return "papel repetido"
+    if not linhas:
         return None
-    v = m.group(1)
+    v = linhas[0]
     return v[1:-1] if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'" else v
 
 
@@ -42,6 +44,10 @@ class PapelDosAgentesTest(unittest.TestCase):
         self.assertEqual(papel('---\npapel: "investigar"\n---\n'), "investigar")
         self.assertEqual(papel("---\npapel: 'investigar' # nota\n---\n"), "investigar")
         self.assertIsNone(papel("---\npapel:investigar\n---\n"))
+
+    def test_chave_repetida_nao_vale(self):
+        # duas declarações deixam o papel ambíguo: o teste não escolhe a última
+        self.assertEqual(papel("---\npapel: revisar\npapel: investigar\n---\n"), "papel repetido")
 
     def test_ha_agentes(self):
         self.assertTrue(AGENTES)
