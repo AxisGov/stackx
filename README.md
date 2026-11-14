@@ -1,28 +1,28 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/banner-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/banner-light.svg">
-  <img alt="stackx — o dialeto tecnico do seu projeto" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/banner-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/banner-light.svg">
+  <img alt="stackx — o dialeto tecnico do seu projeto" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/banner-light.svg" width="100%">
 </picture>
 
 <p>
-  <img alt="harness: Claude Code" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-claude.svg">
-  <img alt="harness: OpenCode" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-opencode.svg">
-  <img alt="regra: evidencia obrigatoria" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-evidencia.svg">
-  <img alt="schema expx v1" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-schema.svg">
-  <img alt="docs pt-BR" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-lang.svg">
-  <img alt="licenca MIT" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/badge-license.svg">
+  <img alt="harness: Claude Code" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/badge-claude.svg">
+  <img alt="harness: OpenCode" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/badge-opencode.svg">
+  <img alt="regra: evidencia obrigatoria" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/badge-evidencia.svg">
+  <img alt="schema expx v1" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/badge-schema.svg">
+  <img alt="docs pt-BR" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/badge-lang.svg">
+  <img alt="licenca MIT" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/badge-license.svg">
 </p>
 
 <p>
-  <a href="https://bittencourtthulio.github.io/expxdev/#stackx"><strong>📘 Documentação do método</strong></a>
+  <a href="https://axisgov.github.io/expxdev/#stackx"><strong>📘 Documentação do método</strong></a>
   &nbsp;·&nbsp;
-  <a href="https://bittencourtthulio.github.io/expxdev/#stackx">Etapas e cartuchos</a>
+  <a href="https://axisgov.github.io/expxdev/#stackx">Etapas e cartuchos</a>
   &nbsp;·&nbsp;
-  <a href="https://bittencourtthulio.github.io/expxdev/#ecossistema">O ecossistema</a>
+  <a href="https://axisgov.github.io/expxdev/#ecossistema">O ecossistema</a>
   &nbsp;·&nbsp;
-  <a href="https://bittencourtthulio.github.io/expxdev/#schema">Contratos</a>
+  <a href="https://axisgov.github.io/expxdev/#schema">Contratos</a>
 </p>
 
 <strong>A camada de convenções do método Expx</strong> — descobre e formaliza o dialeto<br>
@@ -44,23 +44,23 @@ daquele projeto**, não num dialeto genérico.
 
 ## O ecossistema Expx
 
-O método Expx é um conjunto de skills que se compõem, instaladas e mantidas pelo CLI [`expxdev`](https://github.com/bittencourtthulio/expxdev).
+O método Expx é um conjunto de skills que se compõem, instaladas e mantidas pelo CLI [`expxdev`](https://github.com/AxisGov/expxdev).
 
 | Peça | Papel | Relação com a `stackx` |
 |---|---|---|
-| **[expxdev](https://github.com/bittencourtthulio/expxdev)** | o CLI: instala, atualiza e diagnostica o ecossistema, e sobe o painel de operação | é quem instala esta skill (`npx expxdev init`) |
-| **[sprintx](https://github.com/bittencourtthulio/sprintx)** | **Build** — feature nova, F1…F6 | lê o `CONVENCOES.md` na ingestão, no plano, na auditoria e na execução |
-| **[runx](https://github.com/bittencourtthulio/runx)** | **Run** — ocorrência em produção, E1…E5 | lê as convenções na investigação e no fix; consulta os cartuchos pelo sintoma |
-| **[legadox](https://github.com/bittencourtthulio/legadox)** | **camada** de segurança para código legado | o cartucho de migração alimenta o cálculo de raio; em área legada, quem manda é o `PERFIL.md` |
+| **[expxdev](https://github.com/AxisGov/expxdev)** | o CLI: instala, atualiza e diagnostica o ecossistema, e sobe o painel de operação | é quem instala esta skill (`expx init`) |
+| **[sprintx](https://github.com/AxisGov/sprintx)** | **Build** — feature nova, F1…F6 | lê o `CONVENCOES.md` na ingestão, no plano, na auditoria e na execução |
+| **[runx](https://github.com/AxisGov/runx)** | **Run** — ocorrência em produção, E1…E5 | lê as convenções na investigação e no fix; consulta os cartuchos pelo sintoma |
+| **[legadox](https://github.com/AxisGov/legadox)** | **camada** de segurança para código legado | o cartucho de migração alimenta o cálculo de raio; em área legada, quem manda é o `PERFIL.md` |
 | **stackx** *(este repositório)* | **camada** de convenções do repositório | — |
-| **[mergex](https://github.com/bittencourtthulio/mergex)** | entrega: branch, commit por task, PR e pacote de QA | tira do `CONVENCOES.md` as convenções de branch, commit e teste |
-| **[memox](https://github.com/bittencourtthulio/MemoX)** | **camada** de memória do projeto | fonte independente: as convenções não entram no índice dele |
-| **[prodx](https://github.com/bittencourtthulio/prodx)** | **camada** de produto: decide **se** há trabalho | fonte independente: convenção técnica não entra em veredito de produto |
-| **[buildx](https://github.com/bittencourtthulio/buildx)** | orquestra um projeto inteiro, da descrição ao sistema pronto | no B2 o stackx trabalha invertido: em projeto vazio não há convenção a detectar, então a `buildx` decide e o stackx registra, cada regra marcada `decidido_pelo_buildx` em vez de arquivo:linha; entregue a primeira feature, o `/stackx-detectar` normal roda e converte cada regra para a evidência real |
+| **[mergex](https://github.com/AxisGov/mergex)** | entrega: branch, commit por task, PR e pacote de QA | tira do `CONVENCOES.md` as convenções de branch, commit e teste |
+| **[memox](https://github.com/AxisGov/MemoX)** | **camada** de memória do projeto | fonte independente: as convenções não entram no índice dele |
+| **[prodx](https://github.com/AxisGov/prodx)** | **camada** de produto: decide **se** há trabalho | fonte independente: convenção técnica não entra em veredito de produto |
+| **[buildx](https://github.com/AxisGov/buildx)** | orquestra um projeto inteiro, da descrição ao sistema pronto | no B2 o stackx trabalha invertido: em projeto vazio não há convenção a detectar, então a `buildx` decide e o stackx registra, cada regra marcada `decidido_pelo_buildx` em vez de arquivo:linha; entregue a primeira feature, o `/stackx-detectar` normal roda e converte cada regra para a evidência real |
 
 **Camadas** (`stackx`, `legadox`, `memox`, `prodx`) sozinhas não fazem nada — elas modificam o comportamento da `sprintx` e da `runx`. Sem `docs/stack/CONVENCOES.md`, nada muda: as irmãs se comportam como se comportariam sem esta skill. A `buildx` inverte isso: é a única peça que **depende** de outras para rodar — o `stackx` segue opcional para ela, e sem ele o projeto novo apenas nasce sem convenção registrada.
 
-Detalhes do ecossistema inteiro no [README do expxdev](https://github.com/bittencourtthulio/expxdev).
+Detalhes do ecossistema inteiro no [README do expxdev](https://github.com/AxisGov/expxdev).
 
 ---
 
@@ -104,9 +104,9 @@ camada HTTP é mockada ou sobe container. Nada disso cabe num pacote genérico:
 está no repositório do cliente.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/fluxo-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/fluxo-light.svg">
-  <img alt="O stackx le manifestos, testes, migracoes e codigo do repositorio e gera o CONVENCOES.md, que sprintx, runx e legadox consultam antes de escrever codigo; diante de dois dialetos em conflito, pergunta ao humano em vez de escolher sozinho" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/fluxo-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/fluxo-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/fluxo-light.svg">
+  <img alt="O stackx le manifestos, testes, migracoes e codigo do repositorio e gera o CONVENCOES.md, que sprintx, runx e legadox consultam antes de escrever codigo; diante de dois dialetos em conflito, pergunta ao humano em vez de escolher sozinho" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/fluxo-light.svg" width="100%">
 </picture>
 
 Por isso o stackx é um **detector e gerador**, não um catálogo. Uma skill só,
@@ -119,9 +119,9 @@ Estritamente sequenciais, e só a terceira fala com você — porque é a única
 que o repositório não tem a resposta.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/pipeline-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/pipeline-light.svg">
-  <img alt="As cinco etapas do stackx: deteccao, convencoes, conflito e lacuna, aderencia e atualizacao, com o artefato de cada uma e os caminhos de retorno" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/pipeline-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/pipeline-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/pipeline-light.svg">
+  <img alt="As cinco etapas do stackx: deteccao, convencoes, conflito e lacuna, aderencia e atualizacao, com o artefato de cada uma e os caminhos de retorno" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/pipeline-light.svg" width="100%">
 </picture>
 
 ## O que o CONVENCOES.md responde
@@ -244,9 +244,9 @@ são idênticos entre `.claude/commands/` e `.opencode/commands/`.
 ## Integração com sprintx, runx e legadox
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/ecossistema-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/ecossistema-light.svg">
-  <img alt="O stackx e a camada de convencoes sob sprintx, runx e legadox: as tres consultam o CONVENCOES.md antes de escrever codigo" src="https://raw.githubusercontent.com/bittencourtthulio/stackx/main/.github/assets/ecossistema-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/ecossistema-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/ecossistema-light.svg">
+  <img alt="O stackx e a camada de convencoes sob sprintx, runx e legadox: as tres consultam o CONVENCOES.md antes de escrever codigo" src="https://raw.githubusercontent.com/AxisGov/stackx/main/.github/assets/ecossistema-light.svg" width="100%">
 </picture>
 
 Sem `docs/stack/CONVENCOES.md`, nada muda: as três skills se comportam como hoje.
@@ -307,7 +307,7 @@ Duas contenções deliberadas no hook de aderência: ponto marcado como **PROPOS
 
 O agente **`stackx-cartografo`** roda em contexto próprio na detecção: varre o repositório e devolve o inventário FATO / EVIDÊNCIA / FORÇA que a Etapa 2 consome. Ele **não escreve o `CONVENCOES.md` e não decide conflito** — quem apresenta os dialetos e pergunta é a skill.
 
-Os dois hooks gravam no rastro append-only `docs/eventos/<trabalho_id>.jsonl`, seguindo o contrato `expx-eventos` v1 — é o que o painel de operação (`npx expxdev panel`) lê.
+Os dois hooks gravam no rastro append-only `docs/eventos/<trabalho_id>.jsonl`, seguindo o contrato `expx-eventos` v1 — é o que o painel de operação (`expx panel`) lê.
 
 ## Exemplos
 
@@ -344,11 +344,11 @@ não passa — o modelo já sabe aquilo.
 
 <div align="center">
 <sub>Parte do método <strong>Expx</strong> ·
-<a href="https://github.com/bittencourtthulio/expxdev">expxdev</a> ·
-<a href="https://github.com/bittencourtthulio/buildx">buildx</a> ·
-<a href="https://github.com/bittencourtthulio/sprintx">sprintx</a> ·
-<a href="https://github.com/bittencourtthulio/runx">runx</a> ·
-<a href="https://github.com/bittencourtthulio/legadox">legadox</a> ·
+<a href="https://github.com/AxisGov/expxdev">expxdev</a> ·
+<a href="https://github.com/AxisGov/buildx">buildx</a> ·
+<a href="https://github.com/AxisGov/sprintx">sprintx</a> ·
+<a href="https://github.com/AxisGov/runx">runx</a> ·
+<a href="https://github.com/AxisGov/legadox">legadox</a> ·
 stackx ·
-<a href="https://github.com/bittencourtthulio/mergex">mergex</a></sub>
+<a href="https://github.com/AxisGov/mergex">mergex</a></sub>
 </div>
