@@ -48,7 +48,7 @@ O método Expx é um conjunto de skills que se compõem, instaladas e mantidas p
 
 | Peça | Papel | Relação com a `stackx` |
 |---|---|---|
-| **[expxdev](https://github.com/AxisGov/expxdev)** | o CLI: instala, atualiza e diagnostica o ecossistema, e sobe o painel de operação | é quem instala esta skill (`expx init`) |
+| **[expxdev](https://github.com/AxisGov/expxdev)** | o CLI: instala, atualiza e diagnostica o ecossistema, e sobe o painel de operação | é quem instala esta skill (`expx init`, com o CLI instalado pela [release do expxdev](https://github.com/AxisGov/expxdev#instalar-a-partir-da-release)) |
 | **[sprintx](https://github.com/AxisGov/sprintx)** | **Build** — feature nova, F1…F6 | lê o `CONVENCOES.md` na ingestão, no plano, na auditoria e na execução |
 | **[runx](https://github.com/AxisGov/runx)** | **Run** — ocorrência em produção, E1…E5 | lê as convenções na investigação e no fix; consulta os cartuchos pelo sintoma |
 | **[legadox](https://github.com/AxisGov/legadox)** | **camada** de segurança para código legado | o cartucho de migração alimenta o cálculo de raio; em área legada, quem manda é o `PERFIL.md` |
